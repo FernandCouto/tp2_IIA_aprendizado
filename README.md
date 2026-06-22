@@ -18,6 +18,61 @@ A arquitetura foi construída **do zero** (sem o uso do scikit-learn na etapa in
 
 ---
 
+## 🚀 Como Executar
+
+Este projeto utiliza um ambiente virtual (`venv`) para isolar as dependências. Siga os passos abaixo no seu terminal para configurar o ambiente e rodar os experimentos:
+
+**1. Criação e Ativação do Ambiente Virtual**
+
+No Windows (PowerShell):
+```powershell
+python -m venv venv
+.\venv\Scripts\activate
+
+```
+
+No Linux / macOS:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+
+```
+
+**2. Instalação das Dependências**
+
+Com o ambiente virtual ativado, instale os pacotes necessários:
+
+```bash
+pip install -r requirements.txt
+
+```
+
+**3. Execução dos Programas**
+
+Os três módulos principais são completamente dissociados. Você pode rodar as avaliações individualmente através dos comandos abaixo na raiz do projeto - certifique-se de estar com seu ambiente virtual, venv, ativado:
+
+* **Para testar o k-NN (Supervisionado Autoral):**
+```bash
+python codigo/comp.py
+
+```
+
+
+* **Para testar o k-Means (Não-Supervisionado Autoral):**
+```bash
+python codigo/nosu.py
+
+```
+
+
+* **Para testar a implementação oficial (Scikit-Learn):**
+```bash
+python codigo/official.py
+
+```
+---
+
 ## ⚙️ O que tem debaixo do capô?
 
 <details>
@@ -36,7 +91,7 @@ Implementação autoral do k-Means (`meu_kmeans.py`) focada em agrupamento de da
 Implementação autoral do k-Nearest Neighbors (`meu_knn.py`) focada em classificação baseada em memória:
 * **Isolamento de Dados:** Separação estrita entre bases de Treino (`X_treino`, `y_treino`) e Teste (`X_teste`, `y_teste`) para evitar vazamento de dados.
 * **Votação Majoritária:** Apuração da moda estatística dos $k$ vizinhos mais próximos.
-* **Critério de Desempate Ponderado:** Em caso de empates em valores de $k$ pares, a decisão é tomada calculando a menor distância acumulada dos vizinhos.
+
 </details>
 
 <details>
@@ -60,6 +115,7 @@ Ambos os algoritmos contam com geradores de **Matriz de Confusão** customizados
  ┣ 📂 codigo
  ┃ ┣ 📜 comp.py       # Algoritmo supervisionado (k-NN) e sistema de votação
  ┃ ┗ 📜 nosu.py       # Lógica matemática e execução do agrupamento (k-Means)
+ ┃ ┗ 📜 official.py   # Implementação do K-NN e K-Means usando scikit-learn
  ┣ 📂 dados
  ┃ ┣ 📜 nba_teste.csv # Base de "desafio"
  ┃ ┗ 📜 nba_treino.csv# Base de "memória" e gabarito (1340 jogadores)
