@@ -56,7 +56,8 @@ def AvaliarKNN(previsoes, gabarito_real): # matriz de confusão direta, sem prec
     acuracia = (vp + vn) / total # quantos acertos o algoritmo teve no geral
     revocacao = vp / (vp + fn) if (vp + fn) > 0 else 0.0 # quantos dos jogadores que tiveram v o algoritmo acertou
     precisao = vp / (vp + fp) if (vp + fp) > 0 else 0.0 # quantos dos que o algoritmo disse que tiveram v realmente tiveram v
-    
+    f1 = 2 *( (precisao*revocacao) / (precisao+revocacao))
+
     print("\n-> matriz de confusão")
     print("Verdadeiros positivos | Falsos negativos")
     print("Falsos positivos      | Verdadeiros negativos\n")
@@ -66,6 +67,7 @@ def AvaliarKNN(previsoes, gabarito_real): # matriz de confusão direta, sem prec
     print(f"Acuracia = {acuracia:.4f}")
     print(f"Revocação = {revocacao:.4f}")
     print(f"Precisão = {precisao:.4f}")
+    print(f"F1 = {f1:.4f}")
     
     return
 
@@ -80,6 +82,11 @@ if __name__ == "__main__":
 
         jogadores_treino, gabarito_treino, jogadores_teste, gabarito_teste = DadosKNN(arq_treino, arq_teste) # prepara os dados
         
+        # k=2
+        print("\n--- Experimento k=2 ---")
+        chutes_k2 = PreverKNN(jogadores_treino, gabarito_treino, jogadores_teste, k=2)
+        AvaliarKNN(chutes_k2, gabarito_teste)
+
         # k=5
         print("\n--- Experimento k=5 ---")
         chutes_k5 = PreverKNN(jogadores_treino, gabarito_treino, jogadores_teste, k=5)

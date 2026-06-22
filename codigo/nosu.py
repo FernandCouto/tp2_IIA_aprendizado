@@ -122,9 +122,36 @@ if __name__ == "__main__":
         centros_k2, grupos_k2 = Ajustes(Matriz_X, k=2)
         AvaliarClusters(grupos_k2, Vetor_Y)
         
-        k=3 
+        print("\n-> Valores finais dos Centróides (k=2):")
+        for i, centro in enumerate(centros_k2):
+            print(f"   Centróide {i}:")
+            print(f"   {np.round(centro, 4)}")
+            
+        
+        #k=3 
         print("\n--- Experimento k=3 ---")
-        centros_k2, grupos_k2 = Ajustes(Matriz_X, k=3)
+        centros_k3, grupos_k3 = Ajustes(Matriz_X, k=3)
+        
+        print("\n-> Valores finais dos Centróides (k=3):")
+        for i, centro in enumerate(centros_k3):
+            print(f"   Centróide {i}:")
+            print(f"   {np.round(centro, 4)}")
+
+        print("\n-> Análise de Relação com os Rótulos Originais (k=3):")
+        
+        for i in range(3):
+            total_grupo = np.sum(grupos_k3 == i)
+            if total_grupo > 0:
+                longos = np.sum((grupos_k3 == i) & (Vetor_Y == 1))
+                curtos = np.sum((grupos_k3 == i) & (Vetor_Y == 0))
+                pct_longos = (longos / total_grupo) * 100
+                pct_curtos = (curtos / total_grupo) * 100
+                
+                print(f"\n   • Cluster {i}: Total de {total_grupo} jogadores")
+                print(f"     > Com carreira >= 5 anos (TARGET=1): {longos} ({pct_longos:.2f}%)")
+                print(f"     > Com carreira < 5 anos  (TARGET=0): {curtos} ({pct_curtos:.2f}%)")
+            else:
+                print(f"\n   • Cluster {i}: Ficou vazio nesta execução.")
         
         
     except FileNotFoundError:
